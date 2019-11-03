@@ -309,26 +309,11 @@ def compute_evaluation_criteria_across_wholeMatrix(true_result, prediction,score
     
   
         
-       # print('fdfdfdfd',MCC_new)
-       #print('REC_new' , REC_new)
+      
     Specificity=((tn_final)/(tn_final+fp_final))
     
   
-    AA=[]
-    for thre in np.arange(0.1,1.0,0.1):
-       for i in range(len(true_result[0])):
-           prediction = apply_threshold(scores, thre)
-           try:
-               AUC_new+=roc_auc_score(true_result[:,i], prediction[:,i])
-           except ValueError:
-               pass
-    
-       AUC_new=AUC_new/(len(true_result[0]))
-       AA.append(AUC_new)
-       #print(AA)
-      #
-    AUC_neww=np.mean(AA)
-       
+   
    
     AUC_new_new=AUC_new_new/(co)
     for i in range(0, len(true_result[0])):
@@ -358,15 +343,7 @@ def compute_evaluation_criteria_across_wholeMatrix(true_result, prediction,score
             fmeas.append(round((2 * recall * precision) / (precision + recall), 4))
     finalF = np.mean(fmeas)
   #  print('fffffffffffffffffffffffffff',co)
-    return round(precision_new,2),round(finalF,2), round(ACC,2),round(ACC_new,2),round(F1_score_new,2),round(REC_new,2),round(Specificity,2),round(MCC_new,2),round(AUC_neww,2),round(AUC_new_new,2), fmeas
+    return round(precision_new,2),round(finalF,2), round(ACC,2),round(ACC_new,2),round(F1_score_new,2),round(REC_new,2),round(Specificity,2),round(MCC_new,2),round(AUC_new_new,2), fmeas
 
 
-    
-    
-    
-    
-
-
-
-
-
+ 
