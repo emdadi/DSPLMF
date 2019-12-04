@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 """
 Created on 2018
-
 @author: asus
 """
 
@@ -21,7 +20,7 @@ import numpy as np
 
 data_folder = os.path.join(os.path.pardir, 'Datasets') # All dataset's matrices folder
 
-observation_mat, proteins_sim,proteins_sim_2,observation_mat_IC50,drugMat =load_matrices(data_folder) 
+observation_mat, cell_sim,cell_sim_2,observation_mat_IC50,drugMat =load_matrices(data_folder) 
 
 seed = [80162,45929]
 
@@ -40,7 +39,7 @@ result=0.0
 
 
 
-for train_index, test_index, in kf.split(proteins_sim, observation_mat):
+for train_index, test_index, in kf.split(cell_sim, observation_mat):
    
         
   
@@ -58,7 +57,7 @@ for train_index, test_index, in kf.split(proteins_sim, observation_mat):
     y = np.tile(y, len(test_index))
   
     
-    model.fix_model(train_location_mat, train_location_mat,drugMat, proteins_sim,proteins_sim_2, seed)
+    model.fix_model(train_location_mat, train_location_mat,drugMat, cell_sim,cell_sim_2, seed)
     scores = np.reshape(model.predict_scores(zip(x, y)), true_result.shape)
     pred_Ic50_values=np.reshape(model.predict_scores_2(zip(x, y)), true_result.shape)
    
@@ -110,8 +109,4 @@ print('Specificity', Specificity)
 print('MCC_new', MCC_new)
 print('AUC', AUC)
 print('precision_new', precision_new)
-
-
-
-
 
