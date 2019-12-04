@@ -17,9 +17,9 @@ from sklearn.metrics import confusion_matrix, precision_score, recall_score,roc_
 from sklearn import metrics
 
 def score_to_exact_rank(s):
-    #s=(-1*s)
+    
     p=np.argsort(s)[::-1]
-    #p=np.argsort(s)
+    
     return np.argsort(p)
 
 
@@ -134,14 +134,13 @@ def apply_threshold_median(scores):
 def compute_evaluation_criteria_across_wholeMatrix(true_result, prediction,scores):
     pres = np.zeros(len(true_result))
     recs = np.zeros(len(true_result))
-    ACC=0.0
+    
     ACC_new=0.0
     F1_score_new=0.0
     REC_new=0.0
     Specificity=0.0
     MCC_new=0.0
-    AUC_new=0.0
-    AUC_neww=0.0
+    
     AUC_new_new=0.0
     precision_new=0.0
     co=0.0
@@ -188,7 +187,7 @@ def compute_evaluation_criteria_across_wholeMatrix(true_result, prediction,score
         fn_final+=fn
         
    
-    ACC = (tp_final / (tp_final + fp_final + fn_final))   
+    #ACC = (tp_final / (tp_final + fp_final + fn_final))   
     ACC_new =((tp_final+tn_final)/ (tp_final + fp_final + fn_final+tn_final))
     F1_score_new =((2*tp_final) / ((2*tp_final)+fp_final+ fn_final))
     REC_new=((tp_final)/(tp_final+fn_final))
@@ -234,7 +233,7 @@ def compute_evaluation_criteria_across_wholeMatrix(true_result, prediction,score
             fmeas.append(round((2 * recall * precision) / (precision + recall), 4))
     finalF = np.mean(fmeas)
   #  print('fffffffffffffffffffffffffff',co)
-    return round(precision_new,2),round(finalF,2), round(ACC,2),round(ACC_new,2),round(F1_score_new,2),round(REC_new,2),round(Specificity,2),round(MCC_new,2),round(AUC_new_new,2), fmeas
+    return round(precision_new,2),round(ACC_new,2),round(F1_score_new,2),round(REC_new,2),round(Specificity,2),round(MCC_new,2),round(AUC_new_new,2), fmeas
 
 
  
