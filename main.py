@@ -28,7 +28,7 @@ num_repeats=1 # Number of repetition of 10-fold cross validation
 model = PSLMF(c=1, K1=10, K2=10, r=23, lambda_p=0.6, lambda_l=0.6, alpha=0.4,beta=0.05, theta=1.3, max_iter=1000)
 
 kf = RepeatedKFold(n_splits=10, n_repeats=num_repeats)
-F1, ACC , ACC_new, F1_score_new= 0.0, 0.0, 0.0, 0.0
+ACC_new, F1_score_new= 0.0, 0.0, 0.0, 0.0
 REC_new=0.0
 Specificity=0.0
 MCC_new=0.0
@@ -66,9 +66,8 @@ for train_index, test_index, in kf.split(cell_sim, observation_mat):
     prediction = apply_threshold(scores, 0.6)
    
    
-    precision_new_o,fold_f1, fold_acc,fold_ACC_new ,fold_F1_score_new,REC_new_output,Specificity_new,MCC_new_output,AUC_new_new_o,fold_loc_f1 = compute_evaluation_criteria_across_wholeMatrix(true_result, prediction,scores)
-    F1+=fold_f1
-    ACC+=fold_acc
+    precision_new_o,fold_ACC_new ,fold_F1_score_new,REC_new_output,Specificity_new,MCC_new_output,AUC_new_new_o,fold_loc_f1 = compute_evaluation_criteria_across_wholeMatrix(true_result, prediction,scores)
+    
     ACC_new+=fold_ACC_new
     F1_score_new+=fold_F1_score_new
     REC_new+=REC_new_output
@@ -88,8 +87,7 @@ for train_index, test_index, in kf.split(cell_sim, observation_mat):
     
    
     
-F1=round(F1/(10*num_repeats),2)
-ACC=round(ACC/(10*num_repeats),2)
+
 ACC_new=round(ACC_new/(10*num_repeats),2)
 F1_score_new=round(F1_score_new/(10*num_repeats),2)
 REC_new=round(REC_new/(10*num_repeats),2)
@@ -101,7 +99,7 @@ AUC=round(AUC_new_new/(10*num_repeats),2)
 
 
 
-print('F1',F1, 'ACC',ACC)
+
 print('ACC_new', ACC_new)
 print('F1_score_new', F1_score_new)
 print('REC_new', REC_new)
