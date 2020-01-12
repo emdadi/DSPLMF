@@ -1,11 +1,11 @@
+
 # -*- coding: utf-8 -*-
 """
 Created on 2018
 @author: asus
 """
-
-
 from __future__ import division
+
 import os
 from sklearn.model_selection import  RepeatedKFold
 from function import load_matrices, apply_threshold
@@ -25,10 +25,10 @@ observation_mat, cell_sim,cell_sim_2,observation_mat_IC50,drugMat =load_matrices
 seed = [80162,45929]
 
 num_repeats=1 # Number of repetition of 10-fold cross validation
-model = PSLMF(c=1, K1=10, K2=10, r=23, lambda_p=0.6, lambda_l=0.6, alpha=0.4,beta=0.05, theta=1.3, max_iter=1000)
+model = PSLMF(c=1, K1=20, K2=20, r=95, lambda_p=0.6, lambda_l=0.6, alpha=0.5,beta=0.1, theta=1.3, max_iter=1000)
 
 kf = RepeatedKFold(n_splits=10, n_repeats=num_repeats)
-ACC_new, F1_score_new= 0.0, 0.0, 0.0, 0.0
+ACC_new, F1_score_new= 0.0, 0.0
 REC_new=0.0
 Specificity=0.0
 MCC_new=0.0
@@ -73,9 +73,9 @@ for train_index, test_index, in kf.split(cell_sim, observation_mat):
     REC_new+=REC_new_output
     Specificity+=Specificity_new
     MCC_new=MCC_new_output+MCC_new
-    AUC_new=AUC_new_o+AUC_new
+    #AUC_new=AUC_new_o+AUC_new
     precision_new=precision_new_o+precision_new
-    AUC=AUC_new_new_o+AUC_new_new
+    AUC=AUC_new_new_o+AUC
    
     observation_mat_IC50_mat = np.array(observation_mat_IC50)
    
@@ -95,7 +95,7 @@ MCC_new=round(MCC_new/(10*num_repeats),2)
 Specificity=round(Specificity/(10*num_repeats),2)
 
 precision_new=round(precision_new/(10*num_repeats),2)
-AUC=round(AUC_new_new/(10*num_repeats),2)
+AUC=round(AUC/(10*num_repeats),2)
 
 
 
@@ -107,4 +107,3 @@ print('Specificity', Specificity)
 print('MCC_new', MCC_new)
 print('AUC', AUC)
 print('precision_new', precision_new)
-
