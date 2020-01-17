@@ -25,11 +25,13 @@ observation_mat, cell_sim,cell_sim_2,observation_mat_IC50,drugMat =load_matrices
 seed = [80162,45929]
 
 num_repeats=1 # Number of repetition of 10-fold cross validation
+
+
 # for GDSC datase:
-model = PSLMF(c=1, K1=20, K2=20, r=95, lambda_p=0.6, lambda_l=0.6, alpha=0.5,beta=0.1, theta=1.3, max_iter=1000)
+#model = PSLMF(c=1, K1=20, K2=20, r=95, lambda_p=0.6, lambda_l=0.6, alpha=0.5,beta=0.1, theta=1.3, max_iter=1000)
 
 #for CCLE dataset:
-#model = PSLMF(c=1, K1=10, K2=10, r=23, lambda_p=0.6, lambda_l=0.6, alpha=0.5,beta=0.1, theta=1.3, max_iter=1000)
+model = PSLMF(c=1, K1=10, K2=10, r=23, lambda_p=0.6, lambda_l=0.6, alpha=0.5,beta=0.1, theta=1.3, max_iter=1000)
 
 kf = RepeatedKFold(n_splits=10, n_repeats=num_repeats)
 ACC_new, F1_score_new= 0.0, 0.0
