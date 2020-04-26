@@ -9,7 +9,7 @@ from __future__ import division
 import os
 from sklearn.model_selection import  RepeatedKFold
 from function import load_matrices, apply_threshold
-from lmf import PSLMF
+from function import PSLMF
 from function import apply_threshold_median,score_to_exact_rank
 
 from function import compute_evaluation_criteria_across_wholeMatrix
